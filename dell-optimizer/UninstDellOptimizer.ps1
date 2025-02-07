@@ -19,8 +19,8 @@ Start-Sleep -Seconds 3
 # Detects if DellInc.DellOptimizer (Appx Package) is present 
 # and uninstalls it if found
 If (Get-AppxPackage -Name "DellInc.DellOptimizer") {
-	$packageFullName = (Get-AppxPackage -Name "DellInc.DellOptimizer").PackageFullName
-	Remove-AppxPackage -Package $packageFullName -AllUsers
+    $packageFullName = (Get-AppxPackage -Name "DellInc.DellOptimizer").PackageFullName
+    Remove-AppxPackage -Package $packageFullName -AllUsers
 }
 
 # Detects if DellOptimizerUI (64-bit) is present 
@@ -29,10 +29,10 @@ $64BitUI = (Get-ItemProperty "HKLM:\Software\Microsoft\Windows\CurrentVersion\Un
 If ($64BitUI) {
 
     $parts = $64BitUI -split " "
-	$parts = $parts[1] -split "/I"
-	$appID = $parts[1]
+    $parts = $parts[1] -split "/I"
+    $appID = $parts[1]
 	
-	Start-Process "C:\Windows\System32\msiexec.exe" -ArgumentList "/x $appID /qn" -Wait
+    Start-Process "C:\Windows\System32\msiexec.exe" -ArgumentList "/x $appID /qn" -Wait
 }
 
 # Detects if DellOptimizerUI (64-bit) is present 
@@ -40,11 +40,11 @@ If ($64BitUI) {
 $64BitApp = (Get-ItemProperty "HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\*" | Where-Object { $_.DisplayName -match "Dell Optimizer"}).UninstallString
 If ($64BitApp) {
 	
-	$parts = $64BitApp -split " "
-	$parts = $parts[1] -split "/I"
-	$appID = $parts[1]
+    $parts = $64BitApp -split " "
+    $parts = $parts[1] -split "/I"
+    $appID = $parts[1]
 	
-	Start-Process "C:\Windows\System32\msiexec.exe" -ArgumentList "/x $appID /qn" -Wait
+    Start-Process "C:\Windows\System32\msiexec.exe" -ArgumentList "/x $appID /qn" -Wait
 }
 
 # Detects if Dell Optimizer Core (32-bit) is present 
@@ -52,5 +52,5 @@ If ($64BitApp) {
 $core = (Get-ItemProperty "HKLM:\Software\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\*" | Where-Object { $_.DisplayName -match "Dell Optimizer Core"}).UninstallString
 If ($core) {
 
-	cmd /c $core -silent
+    cmd /c $core -silent
 }
