@@ -10,7 +10,6 @@ If ($procs) {
         $thisID = $proc.Id
         $thisName = $proc.ProcessName
         Stop-Process -Id $thisId -Force -ErrorAction SilentlyContinue
-        Write-Host "Killing $thisID`: $thisName" -ErrorAction SilentlyContinue
     }
 }
 
